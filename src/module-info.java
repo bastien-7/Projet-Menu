@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author terrier
+ *
+ */
+module Menu {
+}
