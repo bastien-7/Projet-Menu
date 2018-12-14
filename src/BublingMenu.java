@@ -1,5 +1,7 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.Vector;
 
 import javax.swing.JComponent;
@@ -51,7 +53,9 @@ public class BublingMenu extends JComponent {
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.fillOval(mousePosX-100/2, mousePosY-100/2, 100, 100);
+		g2.setColor(new Color(0, 0, 0, 85));
+		Rectangle bound = this.getBounds();
+		g2.fillOval(0, 0, this.getWidth(), this.getHeight());
 
 	}
 	

@@ -28,36 +28,11 @@ public class test {
 		JMenu j2 = new JMenu("Menu 2");
 		JMenu sousMenu = new JMenu("SousMenu 1");
 
-		for(int l = 0; l<15; l++) {
-			JMenuItem i = new JMenuItem("item "+l);
-			j.add(i);
+		
 
-			if (l==3 || l==11) {
-				menusFavoris.add(i);
-				itemSelectionne = i;
-			}
-
-			if (l == 7) {
-				j.add(sousMenu);
-			}
-		}
-
-		for (int m = 15; m< 23; m++) {
-			JMenuItem i = new JMenuItem("item "+m);
-			sousMenu.add(i);
-		}
-
-
-
-		JLabel itemSelect = new JLabel(itemSelectionne.getText());
-		for(int k = 0 ; k<menusFavoris.size(); k++) {
-			menusFavoris.get(k).setBackground(Color.GRAY);
-		}
-
-		itemSelect.setBounds(700,700,100,30);
-
+		
 		BublingMenu bMenu = new BublingMenu(50, 50);
-
+		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 
@@ -66,7 +41,7 @@ public class test {
 		panel.add(JMenuB, BorderLayout.NORTH);
 		panel.setBounds(0, 0, 800, 800);
 
-		bMenu.setBounds(0, 0, 800, 800);
+		bMenu.setBounds(0, 0, 100, 100);
 
 		jLPane.add(panel, JLayeredPane.DEFAULT_LAYER);
 		jLPane.add(bMenu, JLayeredPane.POPUP_LAYER);
@@ -76,7 +51,8 @@ public class test {
 
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				bMenu.setMousePos(e.getX(), e.getY());
+				bMenu.setBounds(e.getX()-100/2, e.getY()-32-100/2, 100, 100);
+//				bMenu.setMousePos(e.getX()-(panel.getX()), e.getY()-JMenuB.getHeight());
 				bMenu.repaint();
 			}
 
@@ -116,6 +92,34 @@ public class test {
 
 			}
 		};
+		for(int l = 0; l<15; l++) {
+			JMenuItem i = new JMenuItem("item "+l);
+			i.addMouseMotionListener(new MyMouseListener(bMenu, i, panel));
+			j.add(i);
+
+			if (l==3 || l==11) {
+				menusFavoris.add(i);
+				itemSelectionne = i;
+			}
+
+			if (l == 7) {
+				j.add(sousMenu);
+			}
+		}
+
+		for (int m = 15; m< 23; m++) {
+			JMenuItem i = new JMenuItem("item "+m);
+			sousMenu.add(i);
+		}
+
+
+
+		JLabel itemSelect = new JLabel(itemSelectionne.getText());
+		for(int k = 0 ; k<menusFavoris.size(); k++) {
+			menusFavoris.get(k).setBackground(Color.GRAY);
+		}
+
+		itemSelect.setBounds(700,700,100,30);
 
 		frame.addMouseMotionListener(mil);
 		JMenuB.add(j);
