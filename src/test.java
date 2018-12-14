@@ -38,15 +38,12 @@ public class test {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 
-		JLayeredPane jLPane = new JLayeredPane();
 
 		panel.add(JMenuB, BorderLayout.NORTH);
 		panel.setBounds(0, 0, 800, 800);
 
 		bMenu.setBounds(0, 0, 100, 100);
 
-		jLPane.add(panel, JLayeredPane.DEFAULT_LAYER);
-		jLPane.add(bMenu, JLayeredPane.POPUP_LAYER);
 
 		for(int l = 0; l<15; l++) {
 			JMenuItem i = new JMenuItem("item "+l);
@@ -83,7 +80,9 @@ public class test {
 		JMenuB.add(j);
 		JMenuB.add(j2);
 		frame.add(itemSelect);
-		frame.add(jLPane);
+		frame.add(panel);
+		frame.setGlassPane(bMenu);
+		bMenu.setVisible(true);
 
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
