@@ -64,7 +64,9 @@ public class test {
 			i.addMouseMotionListener(new MyMouseListener(bMenu, i, panel));
 			sousMenu.add(i);
 		}
-
+		j.addMouseMotionListener(new MyMouseListener(bMenu, j,panel));
+		j2.addMouseMotionListener(new MyMouseListener(bMenu, j,panel));
+		JMenuB.addMouseMotionListener(new MyMouseListener(bMenu, menusFavoris));
 		sousMenu.addMouseMotionListener(new MyMouseListener(bMenu, sousMenu, panel));
 
 
