@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.util.Vector;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
@@ -18,13 +19,14 @@ import javax.swing.event.MouseInputListener;
 public class test {
 
 	public static void main(String[] args) {
-		Vector<JMenuItem> menusFavoris = new Vector<>();
+		Vector<JComponent> menusFavoris = new Vector<>();
 		JMenuItem itemSelectionne = null;
 
 		JFrame frame = new JFrame();
 		frame.setSize(800, 800);
 		JMenuBar JMenuB = new JMenuBar();
 		JMenu j = new JMenu("Menu 1");
+		menusFavoris.add(j);
 		JMenu j2 = new JMenu("Menu 2");
 		JMenu sousMenu = new JMenu("SousMenu 1");
 
@@ -46,52 +48,6 @@ public class test {
 		jLPane.add(panel, JLayeredPane.DEFAULT_LAYER);
 		jLPane.add(bMenu, JLayeredPane.POPUP_LAYER);
 
-
-		MouseInputListener mil = new MouseInputListener() {
-
-			@Override
-			public void mouseMoved(MouseEvent e) {
-				bMenu.setBounds(e.getX()-100/2, e.getY()-32-100/2, 100, 100);
-//				bMenu.setMousePos(e.getX()-(panel.getX()), e.getY()-JMenuB.getHeight());
-				bMenu.repaint();
-			}
-
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				// TODO Stub de la méthode généré automatiquement
-
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Stub de la méthode généré automatiquement
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Stub de la méthode généré automatiquement
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Stub de la méthode généré automatiquement
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Stub de la méthode généré automatiquement
-
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Stub de la méthode généré automatiquement
-
-			}
-		};
 		for(int l = 0; l<15; l++) {
 			JMenuItem i = new JMenuItem("item "+l);
 			i.addMouseMotionListener(new MyMouseListener(bMenu, i, panel));
@@ -109,6 +65,7 @@ public class test {
 
 		for (int m = 15; m< 23; m++) {
 			JMenuItem i = new JMenuItem("item "+m);
+			i.addMouseMotionListener(new MyMouseListener(bMenu, i, panel));
 			sousMenu.add(i);
 		}
 
@@ -116,12 +73,13 @@ public class test {
 
 		JLabel itemSelect = new JLabel(itemSelectionne.getText());
 		for(int k = 0 ; k<menusFavoris.size(); k++) {
+			menusFavoris.get(k).setOpaque(true);
 			menusFavoris.get(k).setBackground(Color.GRAY);
 		}
 
 		itemSelect.setBounds(700,700,100,30);
 
-		frame.addMouseMotionListener(mil);
+		frame.addMouseMotionListener(new MyMouseListener(bMenu,menusFavoris));
 		JMenuB.add(j);
 		JMenuB.add(j2);
 		frame.add(itemSelect);
