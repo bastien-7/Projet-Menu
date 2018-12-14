@@ -29,7 +29,6 @@ public class test {
 		menusFavoris.add(j);
 		JMenu j2 = new JMenu("Menu 2");
 		JMenu sousMenu = new JMenu("SousMenu 1");
-
 		
 
 		
@@ -65,6 +64,8 @@ public class test {
 			i.addMouseMotionListener(new MyMouseListener(bMenu, i, panel));
 			sousMenu.add(i);
 		}
+
+		sousMenu.addMouseMotionListener(new MyMouseListener(bMenu, sousMenu, panel));
 
 
 

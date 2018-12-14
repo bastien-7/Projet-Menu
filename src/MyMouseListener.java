@@ -8,7 +8,7 @@ import javax.swing.event.MouseInputListener;
 
 public class MyMouseListener implements MouseInputListener{
 	private BublingMenu bMenu;
-	private JMenuItem item;
+	private JComponent item;
 	private JPanel panel;
 	private Vector<JComponent> menusFavoris;
 	
@@ -18,7 +18,7 @@ public class MyMouseListener implements MouseInputListener{
 		this.menusFavoris = menusFavoris;
 	}
 	
-	public MyMouseListener(BublingMenu bMenu, JMenuItem item, JPanel panel) {
+	public MyMouseListener(BublingMenu bMenu, JComponent item, JPanel panel) {
 		// TODO Auto-generated constructor stub
 		this.bMenu = bMenu;
 		this.item = item;
