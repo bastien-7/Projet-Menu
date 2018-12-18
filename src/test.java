@@ -94,7 +94,7 @@ public class test {
 				j.add(i);
 				break;
 			}
-			i.addMouseMotionListener(new MyMouseListener(bMenu, i, panel, menusFavoris));
+			i.addMouseMotionListener(new MyMouseListener(bMenu, i, panel, menusFavoris,21));
 			i.addActionListener(new ActionListener() {
 	             
 				@Override
@@ -108,7 +108,7 @@ public class test {
 					
 				}
 	        });
-			i.addMouseListener(new MyMouseListener(bMenu, i, panel, menusFavoris));
+			i.addMouseListener(new MyMouseListener(bMenu, i, panel, menusFavoris,21));
 			
 			
 //			if (l == 3 || l == 11 || l == 7) {
@@ -127,13 +127,13 @@ public class test {
 
 		for (int m = 15; m< 23; m++) {
 			JMenuItem i = new JMenuItem("item "+m);
-			i.addMouseMotionListener(new MyMouseListener(bMenu, i, panel, menusFavoris));
+			i.addMouseMotionListener(new MyMouseListener(bMenu, i, panel, menusFavoris,21));
 			sousMenu.add(i);
 		}
-		j.addMouseMotionListener(new MyMouseListener(bMenu, j,panel, menusFavoris));
-		j2.addMouseMotionListener(new MyMouseListener(bMenu, j2,panel, menusFavoris));
-		JMenuB.addMouseMotionListener(new MyMouseListener(bMenu, menusFavoris));
-		sousMenu.addMouseMotionListener(new MyMouseListener(bMenu, sousMenu, panel, menusFavoris));
+		j.addMouseMotionListener(new MyMouseListener(bMenu, j,panel, menusFavoris,21));
+		j2.addMouseMotionListener(new MyMouseListener(bMenu, j2,panel, menusFavoris,21));
+		JMenuB.addMouseMotionListener(new MyMouseListener(bMenu, menusFavoris,21));
+		sousMenu.addMouseMotionListener(new MyMouseListener(bMenu, sousMenu, panel, menusFavoris,21));
 
 
 		//System.out.println(((JMenuItem)itemSelectionne).getText());
@@ -143,10 +143,10 @@ public class test {
 		}
 
 		itemSelect2.setBounds(700,700,100,30);
-		panel.addMouseListener(new MyMouseListener(bMenu, panel, panel, menusFavoris));
-		panel.addMouseMotionListener(new MyMouseListener(bMenu,menusFavoris));
+		panel.addMouseListener(new MyMouseListener(bMenu, panel, panel, menusFavoris,21));
+		panel.addMouseMotionListener(new MyMouseListener(bMenu,menusFavoris,21));
 
-		frame.addMouseMotionListener(new MyMouseListener(bMenu,menusFavoris));
+		frame.addMouseMotionListener(new MyMouseListener(bMenu,menusFavoris,21));
 		
 		
 		JMenuB.add(j);
