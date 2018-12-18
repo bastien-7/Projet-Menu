@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.io.Console;
 import java.util.Vector;
@@ -23,7 +24,8 @@ public class MyMouseListener implements MouseInputListener {
 		this.heightOfBar = heightOfBar;
 	}
 
-	public MyMouseListener(BublingMenu bMenu, JComponent item, JPanel panel, Vector<JComponent> menusFavoris, int heightOfBar) {
+	public MyMouseListener(BublingMenu bMenu, JComponent item, JPanel panel, Vector<JComponent> menusFavoris,
+			int heightOfBar) {
 		// TODO Auto-generated constructor stub
 		this.bMenu = bMenu;
 		this.item = item;
@@ -34,14 +36,16 @@ public class MyMouseListener implements MouseInputListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-
+		if(this.closer instanceof JMenu) {
+			((JMenu)this.closer).doClick();
+		}else if(this.closer instanceof JMenuItem) {
+			((JMenuItem)this.closer).doClick();
+		}
 	}
 
 	@Override
@@ -51,13 +55,12 @@ public class MyMouseListener implements MouseInputListener {
 
 		JComponent closer = null;
 		double minDist = -1;
-		System.out.println("------------------");
+//		System.out.println("------------------");
 
-		System.out.println(menusFavoris);
+//		System.out.println(menusFavoris);
 		for (JComponent c : menusFavoris) {
 			if (c.isShowing()) {
-				double dist = c.getLocation().distance(e.getX() - c.getWidth() / 2,
-						e.getY() - c.getHeight() / 2);
+				double dist = c.getLocation().distance(e.getX() - c.getWidth() / 2, e.getY() - c.getHeight() / 2);
 				if (minDist == -1) {
 					minDist = dist;
 					closer = c;
@@ -66,10 +69,10 @@ public class MyMouseListener implements MouseInputListener {
 					closer = c;
 				}
 			}
-			this.closer = closer;
-			System.out.println(closer.toString());
-			bMenu.setBounds(e.getX() - (int) minDist, e.getY() - (int) minDist, (int) (minDist*2),
-					(int) (minDist*2));
+			changeCloser(closer);
+//			System.out.println(closer.toString());
+			bMenu.setBounds(e.getX() - (int) minDist, e.getY() - (int) minDist, (int) (minDist * 2),
+					(int) (minDist * 2));
 		}
 		// bMenu.setMousePos(e.getX()-(panel.getX()), e.getY()-JMenuB.getHeight());
 		bMenu.repaint();
@@ -108,12 +111,10 @@ public class MyMouseListener implements MouseInputListener {
 //							e.getY() + (int) item.getLocation().getY() - c.getHeight() / 2);
 					double dist;
 					if (c instanceof JMenu && !(item instanceof JMenu)) {
-						dist = c.getLocation().distance(
-								e.getX() + (int) item.getLocation().getX() - c.getWidth() / 2,
-								e.getY() + (int) item.getLocation().getY() +this.heightOfBar - c.getHeight() / 2);
-					}else {
-						dist = c.getLocation().distance(
-								e.getX() + (int) item.getLocation().getX() - c.getWidth() / 2,
+						dist = c.getLocation().distance(e.getX() + (int) item.getLocation().getX() - c.getWidth() / 2,
+								e.getY() + (int) item.getLocation().getY() + this.heightOfBar - c.getHeight() / 2);
+					} else {
+						dist = c.getLocation().distance(e.getX() + (int) item.getLocation().getX() - c.getWidth() / 2,
 								e.getY() + (int) item.getLocation().getY() - c.getHeight() / 2);
 					}
 					if (minDist == -1) {
@@ -125,17 +126,16 @@ public class MyMouseListener implements MouseInputListener {
 					}
 				}
 			}
-			this.closer =closer;
-			if(closer instanceof JMenu && (item instanceof JMenu)) {
+			changeCloser(closer);
+			if (closer instanceof JMenu && (item instanceof JMenu)) {
 				bMenu.setBounds(e.getX() + (int) item.getLocation().getX() - (int) minDist,
 						e.getY() + (int) item.getLocation().getY() - (int) minDist, (int) minDist * 2,
 						(int) minDist * 2);
-			}else {
+			} else {
 				bMenu.setBounds(e.getX() + (int) item.getLocation().getX() - (int) minDist,
-					e.getY() + (int) item.getLocation().getY() + this.heightOfBar - (int) minDist, (int) minDist * 2,
-					(int) minDist * 2);				
+						e.getY() + (int) item.getLocation().getY() + this.heightOfBar - (int) minDist,
+						(int) minDist * 2, (int) minDist * 2);
 			}
-			
 
 //			bMenu.setBounds(e.getX()+(int)item.getLocation().getX()-100/2, e.getY()+(int)item.getLocation().getY()+16-100/2, (int)minDist, (int)minDist);
 			// System.out.println("if 1");
@@ -148,13 +148,12 @@ public class MyMouseListener implements MouseInputListener {
 				if (c.isShowing()) {
 					double distRayon;
 					if (c instanceof JMenu) {
+						distRayon = c.getLocation().distance(e.getX() - c.getWidth() / 2, e.getY() - c.getHeight() / 2);
+					} else {
 						distRayon = c.getLocation().distance(e.getX() - c.getWidth() / 2,
-								e.getY() - c.getHeight() / 2);
-					}else {
-						distRayon = c.getLocation().distance(e.getX() - c.getWidth() / 2,
-								e.getY() -this.heightOfBar- c.getHeight() / 2);
+								e.getY() - this.heightOfBar - c.getHeight() / 2);
 					}
-					
+
 					if (minDist == -1) {
 						minDist = distRayon;
 						closer = c;
@@ -164,12 +163,20 @@ public class MyMouseListener implements MouseInputListener {
 					}
 				}
 			}
-			this.closer = closer;
-				bMenu.setBounds(e.getX() - (int) minDist, e.getY()- (int) minDist, (int) minDist * 2,
-						(int) minDist * 2);
+			changeCloser(closer);
+			bMenu.setBounds(e.getX() - (int) minDist, e.getY() - (int) minDist, (int) minDist * 2, (int) minDist * 2);
 		}
 		// bMenu.setMousePos(e.getX()-(panel.getX()), e.getY()-JMenuB.getHeight());
 		bMenu.repaint();
+	}
+
+	private void changeCloser(JComponent newCloser) {
+		if(this.closer != null) {
+			this.closer.setOpaque(true);
+			this.closer.setBackground(Color.GRAY);			
+		}
+		this.closer = newCloser;
+		this.closer.setBackground(Color.BLUE);
 	}
 
 }

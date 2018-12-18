@@ -41,7 +41,7 @@ public class test {
 
 
 		panel.add(JMenuB, BorderLayout.NORTH);
-		panel.setBounds(0, 0, 800, 800);
+		panel.setBounds(0, 0, 700, 700);
 
 		bMenu.setBounds(0, 0, 100, 100);
 
@@ -142,11 +142,11 @@ public class test {
 			menusFavoris.get(k).setBackground(Color.GRAY);
 		}
 
-		itemSelect2.setBounds(700,700,100,30);
-		panel.addMouseListener(new MyMouseListener(bMenu, panel, panel, menusFavoris,21));
-		panel.addMouseMotionListener(new MyMouseListener(bMenu,menusFavoris,21));
-
-		frame.addMouseMotionListener(new MyMouseListener(bMenu,menusFavoris,21));
+		itemSelect2.setBounds(600,600,100,30);
+		MyMouseListener mil =new MyMouseListener(bMenu,menusFavoris,21); 
+		panel.addMouseListener(mil);
+		panel.addMouseMotionListener(mil);
+		
 		
 		
 		JMenuB.add(j);
