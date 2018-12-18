@@ -14,6 +14,7 @@ public class MyMouseListener implements MouseInputListener {
 	private JPanel panel;
 	private Vector<JComponent> menusFavoris;
 	private int heightOfBar;
+	private JComponent closer;
 
 	public MyMouseListener(BublingMenu bMenu, Vector<JComponent> menusFavoris, int heightOfBar) {
 		// TODO Auto-generated constructor stub
@@ -55,7 +56,8 @@ public class MyMouseListener implements MouseInputListener {
 		System.out.println(menusFavoris);
 		for (JComponent c : menusFavoris) {
 			if (c.isShowing()) {
-				double dist = c.getLocation().distance(e.getX(), e.getY()) * 2 - c.getHeight() - c.getWidth();
+				double dist = c.getLocation().distance(e.getX() - c.getWidth() / 2,
+						e.getY() - c.getHeight() / 2);
 				if (minDist == -1) {
 					minDist = dist;
 					closer = c;
@@ -64,10 +66,10 @@ public class MyMouseListener implements MouseInputListener {
 					closer = c;
 				}
 			}
-
+			this.closer = closer;
 			System.out.println(closer.toString());
-			bMenu.setBounds(e.getX() - (int) minDist / 2, e.getY() - 32 - (int) minDist / 2, (int) minDist,
-					(int) minDist);
+			bMenu.setBounds(e.getX() - (int) minDist, e.getY() - (int) minDist, (int) (minDist*2),
+					(int) (minDist*2));
 		}
 		// bMenu.setMousePos(e.getX()-(panel.getX()), e.getY()-JMenuB.getHeight());
 		bMenu.repaint();
@@ -123,6 +125,7 @@ public class MyMouseListener implements MouseInputListener {
 					}
 				}
 			}
+			this.closer =closer;
 			if(closer instanceof JMenu && (item instanceof JMenu)) {
 				bMenu.setBounds(e.getX() + (int) item.getLocation().getX() - (int) minDist,
 						e.getY() + (int) item.getLocation().getY() - (int) minDist, (int) minDist * 2,
@@ -161,6 +164,7 @@ public class MyMouseListener implements MouseInputListener {
 					}
 				}
 			}
+			this.closer = closer;
 				bMenu.setBounds(e.getX() - (int) minDist, e.getY()- (int) minDist, (int) minDist * 2,
 						(int) minDist * 2);
 		}
