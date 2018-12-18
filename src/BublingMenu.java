@@ -55,8 +55,9 @@ public class BublingMenu extends JComponent {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(new Color(0, 0, 0, 85));
 		Rectangle bound = this.getBounds();
-		g2.fillOval(0, 0, this.getWidth(), this.getHeight());
-
+		if (this.getWidth() != 800 && this.getHeight() != 772) { //pour ne pas qu'il dessine le bubble menu en gros au début ou quand on clique sur un item
+			g2.fillOval(0, 0, this.getWidth(), this.getHeight());
+		}
 	}
 	
 	
