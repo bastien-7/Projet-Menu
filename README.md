@@ -2,7 +2,7 @@
 
 Projet réalisé par : COURTIAL Julien, GROS-DAILLON Hugo et TERRIER Bastien
 
-Ce projet est réalisé en JAVA 10 avec la librairie SWING. Nous avons mis en place un JAR exécutable dans le dossier du projet : **BubbleMenu.jar**.
+Ce projet est réalisé en JAVA 10 avec la librairie SWING. Nous avons mis en place un JAR exécutable dans le dossier du projet : **BubbleMenu.jar**. Pour pouvoir l'exécuter, ajouter les droits d'exécutions (par exemple sur ubundu : **chmod 777 BubbleMenu.jar** puis double cliquer dessus)
 
 Un compte rendu en PDF est aussi disponible : **[INFO5][IHM-Avancee][Bubbling-Menu]COURTIAL-TERRIER-GROS-DAILLON.pdf**.
 
