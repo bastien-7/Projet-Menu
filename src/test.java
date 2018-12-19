@@ -30,6 +30,7 @@ public class test {
 		JMenu j = new JMenu("Menu 1");
 		menusFavoris.add(j);
 		JMenu j2 = new JMenu("Menu 2");
+		menusFavoris.add(j2);		
 		JMenu sousMenu = new JMenu("SousMenu 1");
 		JLabel itemSelect2 = new JLabel("Item frappe");
 
@@ -44,7 +45,7 @@ public class test {
 		panel.setBounds(0, 0, 700, 700);
 
 		bMenu.setBounds(0, 0, 100, 100);
-
+		
 		JMenuItem fav1 = new JMenuItem("item 3");
 		fav1.addActionListener(new ActionListener() {
             
@@ -59,20 +60,26 @@ public class test {
 				
 			}
        });
-		JMenuItem fav2 = new JMenuItem("item 11");
-		fav2.addActionListener(new ActionListener() {
-            
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				//System.out.println("hello");
-				itemSelect2.setText(fav2.getText());
-				
-				//bMenu.repaint();
-				
-				
-			}
-       });
+//		JMenuItem fav2 = new JMenuItem("item 11");
+//		fav2.addActionListener(new ActionListener() {
+//            
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// TODO Auto-generated method stub
+//				//System.out.println("hello");
+//				itemSelect2.setText(fav2.getText());
+//				
+//				//bMenu.repaint();
+//				
+//				
+//			}
+//       });
+		
+//		JMenu fav2 = new JMenu("Sous menu 1");
+//		JMenuItem smi1 = new JMenuItem("SSItem 1");
+//		JMenuItem smi2 = new JMenuItem("SSItem 2");
+//		fav2.add(smi1);
+//		fav2.add(smi2);
 		
 		
 
@@ -87,14 +94,23 @@ public class test {
 				break;
 			case 11:
 				//j.add(fav2);
-				j.add(i);
-				menusFavoris.add(i);
+				JMenu fav2 = new JMenu("Sous menu 1");
+				fav2.addMouseMotionListener(new MyMouseListener(bMenu,fav2,panel,menusFavoris));
+				JMenuItem smi1 = new JMenuItem("SSItem 1");
+				smi1.addMouseMotionListener(new MyMouseListener(bMenu,smi1,panel,menusFavoris));
+				JMenuItem smi2 = new JMenuItem("SSItem 2");
+				smi2.addMouseMotionListener(new MyMouseListener(bMenu,smi2,panel,menusFavoris));
+				fav2.add(smi1);
+				fav2.add(smi2);
+				j.add(fav2);
+				menusFavoris.add(fav2);
+				menusFavoris.add(smi1);
 				break;
 			default:
 				j.add(i);
 				break;
 			}
-			i.addMouseMotionListener(new MyMouseListener(bMenu, i, panel, menusFavoris,21));
+			i.addMouseMotionListener(new MyMouseListener(bMenu, i,panel, menusFavoris));
 			i.addActionListener(new ActionListener() {
 	             
 				@Override
@@ -108,7 +124,7 @@ public class test {
 					
 				}
 	        });
-			i.addMouseListener(new MyMouseListener(bMenu, i, panel, menusFavoris,21));
+			i.addMouseListener(new MyMouseListener(bMenu, i, panel, menusFavoris));
 			
 			
 //			if (l == 3 || l == 11 || l == 7) {
@@ -118,7 +134,55 @@ public class test {
 //				j.add(i);
 //			}
 		}
-
+		
+		for(int l = 0; l<15; l++) {
+			JMenuItem i = new JMenuItem("item "+l);
+			switch(l) {
+			case 3:
+				//j.add(fav1);
+				j2.add(i);
+				menusFavoris.add(i);
+				break;
+			case 11:
+				//j.add(fav2);
+				JMenu fav2 = new JMenu("Sous menu 1");
+				JMenuItem smi1 = new JMenuItem("SSItem 1");
+				JMenuItem smi2 = new JMenuItem("SSItem 2");
+				fav2.add(smi1);
+				fav2.add(smi2);
+				j2.add(fav2);
+				menusFavoris.add(fav2);
+				menusFavoris.add(smi1);
+				break;
+			default:
+				j2.add(i);
+				break;
+			}
+			i.addMouseMotionListener(new MyMouseListener(bMenu, i, panel, menusFavoris));
+			i.addActionListener(new ActionListener() {
+	             
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					//System.out.println("hello");
+					itemSelect2.setText(i.getText());
+					
+					//bMenu.repaint();
+					
+					
+				}
+	        });
+			i.addMouseListener(new MyMouseListener(bMenu, i, panel, menusFavoris));
+			
+			
+//			if (l == 3 || l == 11 || l == 7) {
+//				j.add(fav1);
+//				j.add(fav2);
+//			} else {
+//				j.add(i);
+//			}
+		}
+		
 		/*menusFavoris.add(fav1);
 		menusFavoris.add(fav2);
 		
@@ -127,13 +191,13 @@ public class test {
 
 		for (int m = 15; m< 23; m++) {
 			JMenuItem i = new JMenuItem("item "+m);
-			i.addMouseMotionListener(new MyMouseListener(bMenu, i, panel, menusFavoris,21));
+			i.addMouseMotionListener(new MyMouseListener(bMenu, i, panel, menusFavoris));
 			sousMenu.add(i);
 		}
-		j.addMouseMotionListener(new MyMouseListener(bMenu, j,panel, menusFavoris,21));
-		j2.addMouseMotionListener(new MyMouseListener(bMenu, j2,panel, menusFavoris,21));
-		JMenuB.addMouseMotionListener(new MyMouseListener(bMenu, menusFavoris,21));
-		sousMenu.addMouseMotionListener(new MyMouseListener(bMenu, sousMenu, panel, menusFavoris,21));
+		j.addMouseMotionListener(new MyMouseListener(bMenu, j, panel, menusFavoris));
+		j2.addMouseMotionListener(new MyMouseListener(bMenu, j2, panel, menusFavoris));
+		JMenuB.addMouseMotionListener(new MyMouseListener(bMenu, menusFavoris,panel));
+		sousMenu.addMouseMotionListener(new MyMouseListener(bMenu, sousMenu, panel, menusFavoris));
 
 
 		//System.out.println(((JMenuItem)itemSelectionne).getText());
@@ -143,7 +207,7 @@ public class test {
 		}
 
 		itemSelect2.setBounds(600,600,100,30);
-		MyMouseListener mil =new MyMouseListener(bMenu,menusFavoris,21); 
+		MyMouseListener mil =new MyMouseListener(bMenu,menusFavoris,panel); 
 		panel.addMouseListener(mil);
 		panel.addMouseMotionListener(mil);
 		
